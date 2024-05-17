@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Wellbeing{% endblock %}
+
+{% block content %}
+<h1>Wellbeing</h1>
+<form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin">
+    <label for="cmd">Command:</label>
+    <input id="cmd" name="cmd" type="text">
+    <button type="submit">Send</button>
+</form>
+<table id="outputs"></table>
+{% endblock %}

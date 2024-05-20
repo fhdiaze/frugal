@@ -1,10 +1,9 @@
 use crate::infra::config::Config;
 use axum::{
     http::{header::CONTENT_TYPE, Method},
-    Router,
+    serve, Router,
 };
 use std::net::SocketAddr;
-use tokio::net::TcpListener;
 use tower::ServiceBuilder;
 use tower_http::{
     classify::{ServerErrorsAsFailures, SharedClassifier},
@@ -27,11 +26,11 @@ pub async fn start(config: &Config) {
 
     tracing::info!("Server is going to listen on address={}", address);
 
-    let listener = TcpListener::bind(address)
+    let listener = tokio::net::TcpListener::bind(address)
         .await
         .expect("Error while binding the address!");
 
-    axum::serve(listener, router)
+    serve(listener, router)
         .await
         .expect("Failed to start the web server");
 }

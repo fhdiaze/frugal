@@ -1,16 +1,17 @@
 use askama::Template;
-use axum::{response::IntoResponse, routing::get, Router};
+use axum::{response::Html, routing::get, Router};
 
-use super::template::HtmlTemplate;
+use crate::infra::error::AppError;
 
 #[derive(Template)]
 #[template(path = "home.html")]
 struct HomeTemplate;
 
-async fn handle_get() -> impl IntoResponse {
+async fn handle_get() -> Result<Html<String>, AppError> {
     let template = HomeTemplate {};
+    let content = template.render().map_err(AppError::Render)?;
 
-    HtmlTemplate { content: template }
+    Ok(Html(content))
 }
 
 pub fn route() -> Router {

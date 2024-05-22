@@ -10,6 +10,8 @@ RUN cargo build --release
 RUN rm src/*.rs
 
 COPY ./src ./src
+COPY ./templates ./templates
+COPY ./assets ./assets
 
 RUN rm ./target/release/deps/wellbeing*
 RUN cargo build --release

@@ -11,7 +11,7 @@ mod infra;
 async fn main() {
     let config = Config::new().expect("Failed to load configuration");
     add_logger(&config);
-    api::http::server::start(&config).await;
+    api::web::server::start(&config).await;
 }
 
 fn add_logger(config: &Config) {

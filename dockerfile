@@ -23,4 +23,4 @@ ENV WELLBEING_SERVER__PORT=80
 COPY --from=build /wellbeing/target/release/wellbeing .
 COPY ./config ./config
 
-CMD ["./wero"]
+CMD ["./wellbeing"]

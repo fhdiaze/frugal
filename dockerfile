@@ -11,7 +11,6 @@ RUN rm src/*.rs
 
 COPY ./src ./src
 COPY ./templates ./templates
-COPY ./assets ./assets
 
 RUN rm ./target/release/deps/wellbeing*
 RUN cargo build --release
@@ -21,6 +20,7 @@ FROM rust
 ENV WELLBEING_SERVER__PORT=80
 
 COPY --from=build /wellbeing/target/release/wellbeing .
+COPY ./assets ./assets
 COPY ./config ./config
 
 CMD ["./wellbeing"]

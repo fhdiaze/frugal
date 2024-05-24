@@ -21,4 +21,5 @@ ENV FRUGAL_SERVER__PORT=80
 COPY --from=build /frugal/target/release/frugal .
 COPY ./assets ./assets
 COPY ./config ./config
+COPY ./templates ./templates
 CMD ["./frugal"]

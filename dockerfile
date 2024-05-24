@@ -16,10 +16,10 @@ RUN cargo build --release
 # Bundle Stage
 FROM rust
 
-ENV FRUGAL_SERVER__PORT=80
-
+WORKDIR /frugal
 COPY --from=build /frugal/target/release/frugal .
 COPY ./assets ./assets
 COPY ./config ./config
 COPY ./templates ./templates
+ENV FRUGAL_SERVER__PORT=80
 CMD ["./frugal"]

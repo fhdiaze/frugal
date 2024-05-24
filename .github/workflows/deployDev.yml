@@ -11,7 +11,7 @@ on:
 env:
   REGISTRY: ${{ vars.REGISTRY }}
   IMAGE_NAME: ${{ github.repository }}
-  APP_NAME: devwellbeing
+  APP_NAME: devfrugal
   SLOT_NAME: production
 
 jobs:

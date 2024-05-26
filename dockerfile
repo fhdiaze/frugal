@@ -22,4 +22,4 @@ COPY ./assets ./assets
 COPY ./config ./config
 COPY ./templates ./templates
 ENV FRUGAL_SERVER__PORT=80
-CMD ["./frugal"]
+ENTRYPOINT ["./frugal"]

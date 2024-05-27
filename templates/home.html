@@ -3,11 +3,10 @@
 {% block title %}Frugal{% endblock %}
 
 {% block content %}
-<h1>Frugal</h1>
 <form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin">
-    <label for="cmd">Command:</label>
+    <label for="cmd">Ask:</label>
     <input id="cmd" name="cmd" type="text">
-    <button type="submit">Send</button>
+    <button type="submit">►</button>
 </form>
 <table id="outputs"></table>
 {% endblock %}

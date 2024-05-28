@@ -9,7 +9,6 @@ RUN cargo build --release & rm src/*.rs
 
 COPY ./src ./src
 COPY ./templates ./templates
-RUN rm ./target/release/deps/frugal*
 RUN cargo build --release
 
 # Bundle Stage

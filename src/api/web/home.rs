@@ -8,12 +8,12 @@ use crate::infra::error::AppError;
 struct HomeTemplate;
 
 async fn handle_get() -> Result<Html<String>, AppError> {
-    let template = HomeTemplate {};
-    let content = template.render().map_err(AppError::Render)?;
+  let template = HomeTemplate {};
+  let content = template.render().map_err(AppError::Render)?;
 
-    Ok(Html(content))
+  Ok(Html(content))
 }
 
 pub fn route() -> Router {
-    Router::new().route("/", get(handle_get))
+  Router::new().route("/", get(handle_get))
 }

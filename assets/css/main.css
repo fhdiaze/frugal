@@ -1,12 +1,22 @@
 body {
-    margin: 40px auto;
-    max-width: 650px;
-    padding: 0 10px;
-    font-size: 18px;
-    color: #444;
-    line-height: 1.6;
+  margin: 40px auto;
+  max-width: 650px;
+  padding: 0 10px;
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
 }
 
 h1, h2, h3 {
-    line-height: 1.2;
+  line-height: 1.2;
+}
+
+.rich-text {
+  white-space: pre-wrap;
+}
+
+.box {
+  border-radius: 5px;
+  padding: 5px;
+  border-style: groove;
 }

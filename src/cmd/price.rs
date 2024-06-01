@@ -12,7 +12,7 @@ pub struct PriceCmd {
 
 #[derive(Subcommand, Debug)]
 enum PriceScmd {
-  Scale,
+  Scale(Price),
 }
 
 #[derive(Debug, Clone, Parser)]
@@ -25,7 +25,7 @@ pub struct Price {
 pub fn run(cmd: PriceCmd) -> String {
   if let Some(scmd) = cmd.subcommand {
     match scmd {
-      PriceScmd::Scale => "no price".to_string(),
+      PriceScmd::Scale(_) => "no price".to_string(),
     }
   } else if let Some(value) = cmd.value {
     scale::run(value)

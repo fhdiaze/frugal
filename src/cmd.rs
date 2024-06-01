@@ -5,7 +5,7 @@ use self::price::PriceCmd;
 mod price;
 
 #[derive(Debug, Parser)]
-#[command(no_binary_name = true)]
+#[command(no_binary_name = true, arg_required_else_help = true)]
 pub enum Command {
   Price(PriceCmd),
 }

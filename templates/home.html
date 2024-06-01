@@ -3,10 +3,11 @@
 {% block title %}Frugal{% endblock %}
 
 {% block content %}
-<form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin">
-    <label for="cmd">Ask:</label>
-    <input id="cmd" name="cmd" type="text">
+<div>
+  <form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()" class="search">
+    <input id="cmd" name="cmd" type="search" placeholder="Ask" class="search-left">
     <button type="submit">►</button>
-</form>
-<table id="outputs"></table>
+  </form>
+</div>
+<div id="outputs"></div>
 {% endblock %}

@@ -1,12 +1,40 @@
 body {
-    margin: 40px auto;
-    max-width: 650px;
-    padding: 0 10px;
-    font-size: 18px;
-    color: #444;
-    line-height: 1.6;
+  margin: 40px auto;
+  padding: 0;
+  max-width: 650px;
+  font-size: 18px;
+  color: #444;
+  line-height: 1.6;
 }
 
 h1, h2, h3 {
-    line-height: 1.2;
+  line-height: 1.2;
 }
+
+.rich-text {
+  white-space: pre-wrap;
+}
+
+.box {
+  border-radius: 5px;
+  padding: 5px;
+  border-style: groove;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.footer {
+  text-align: center;
+}
+
+.search {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.search-left {
+  margin-right: 3px;
+  width: 100%;
+}
+

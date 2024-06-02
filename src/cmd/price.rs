@@ -1,5 +1,7 @@
 use clap::{command, Args, Parser, Subcommand};
 
+use crate::infra::error::AppError;
+
 mod scale;
 
 #[derive(Debug, Args)]
@@ -22,14 +24,16 @@ pub struct Price {
   pub cost: f64,
 }
 
-pub fn run(cmd: PriceCmd) -> String {
-  if let Some(scmd) = cmd.subcommand {
-    match scmd {
+pub fn run(cmd: PriceCmd) -> Result<String, AppError> {
+  let result = match cmd.subcommand {
+    Some(scmd) => match scmd {
       PriceScmd::Scale(_) => "no price".to_string(),
-    }
-  } else if let Some(value) = cmd.value {
-    scale::run(value)
-  } else {
-    "error: a value is required for '[MSISDN]' but none was supplied For more information, try '--help'".to_string()
-  }
+    },
+    None => match cmd.value {
+      Some(value) => scale::run(value),
+      None => scale::index()?,
+    },
+  };
+
+  Ok(result)
 }

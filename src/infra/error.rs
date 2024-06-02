@@ -7,7 +7,13 @@ use std::{error::Error, fmt};
 #[derive(Debug)]
 pub enum AppError {
   Render(askama::Error),
+  Parse(clap::Error),
 }
+
+/// Short hand for [`Result`] type
+///
+/// [`Result`]: std::result::Result
+pub type AppResult<T> = Result<T, AppError>;
 
 impl Error for AppError {}
 
@@ -15,6 +21,7 @@ impl fmt::Display for AppError {
   fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
     let message = match self {
       AppError::Render(err) => format!("Render: {}", err),
+      AppError::Parse(err) => format!("Parse: {}", err),
     };
 
     write!(f, "{}", message)

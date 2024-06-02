@@ -1,6 +1,6 @@
 use crate::{
   cmd::{self, Command},
-  infra::error::AppError,
+  infra::error::{AppError, AppResult},
 };
 use askama::Template;
 use axum::{response::Html, routing::post, Form, Router};
@@ -18,9 +18,10 @@ struct OutputTemplate {
   result: String,
 }
 
-async fn handle_run(Form(run): Form<Run>) -> Result<Html<String>, AppError> {
+async fn handle_run(Form(run): Form<Run>) -> AppResult<Html<String>> {
   let result = Command::try_parse_from(run.cmd.split(' '))
-    .map_or_else(|x| x.to_string(), cmd::run);
+    .map_or_else(|e| Err(AppError::Parse(e)), cmd::run)
+    .map_or_else(|e| e.to_string(), |o| o);
   let template = OutputTemplate { result };
   let content = template.render().map_err(AppError::Render)?;
 

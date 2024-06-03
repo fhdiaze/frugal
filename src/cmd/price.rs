@@ -20,8 +20,11 @@ enum PriceScmd {
 
 #[derive(Debug, Clone, Args)]
 pub struct Price {
+  #[arg(required = false)]
   pub items: isize,
+  #[arg(required = false)]
   pub size: isize,
+  #[arg(required = false)]
   pub cost: f64,
 }
 

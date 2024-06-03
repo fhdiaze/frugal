@@ -1,10 +1,11 @@
-use clap::{command, Args, Parser, Subcommand};
+use clap::{command, Args, Subcommand};
 
 use crate::infra::error::AppError;
 
 mod scale;
 
 #[derive(Debug, Args)]
+#[command(args_conflicts_with_subcommands = true)]
 pub struct PriceCmd {
   #[clap(flatten)]
   value: Option<Price>,
@@ -17,7 +18,7 @@ enum PriceScmd {
   Scale(Price),
 }
 
-#[derive(Debug, Clone, Parser)]
+#[derive(Debug, Clone, Args)]
 pub struct Price {
   pub items: isize,
   pub size: isize,
@@ -27,7 +28,7 @@ pub struct Price {
 pub fn run(cmd: PriceCmd) -> Result<String, AppError> {
   let result = match cmd.subcommand {
     Some(scmd) => match scmd {
-      PriceScmd::Scale(_) => "no price".to_string(),
+      PriceScmd::Scale(price) => scale::run(price),
     },
     None => match cmd.value {
       Some(value) => scale::run(value),

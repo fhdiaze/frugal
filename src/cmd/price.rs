@@ -1,8 +1,11 @@
-use clap::{command, Args, Parser, Subcommand};
+use clap::{command, Args, Subcommand};
+
+use crate::infra::error::AppError;
 
 mod scale;
 
 #[derive(Debug, Args)]
+#[command(args_conflicts_with_subcommands = true)]
 pub struct PriceCmd {
   #[clap(flatten)]
   value: Option<Price>,
@@ -15,21 +18,29 @@ enum PriceScmd {
   Scale(Price),
 }
 
-#[derive(Debug, Clone, Parser)]
+#[derive(Debug, Clone, Args)]
 pub struct Price {
-  pub items: isize,
+  /// Grams, weight or units per item
+  #[arg(required = false)]
   pub size: isize,
+  /// Cost of the items
+  #[arg(required = false)]
   pub cost: f64,
+  /// Number of items included for the price
+  #[arg(required = false, default_value_t = 1)]
+  pub items: isize,
 }
 
-pub fn run(cmd: PriceCmd) -> String {
-  if let Some(scmd) = cmd.subcommand {
-    match scmd {
-      PriceScmd::Scale(_) => "no price".to_string(),
-    }
-  } else if let Some(value) = cmd.value {
-    scale::run(value)
-  } else {
-    "error: a value is required for '[MSISDN]' but none was supplied For more information, try '--help'".to_string()
-  }
+pub fn run(cmd: PriceCmd) -> Result<String, AppError> {
+  let result = match cmd.subcommand {
+    Some(scmd) => match scmd {
+      PriceScmd::Scale(price) => scale::run(price),
+    },
+    None => match cmd.value {
+      Some(value) => scale::run(value),
+      None => scale::index()?,
+    },
+  };
+
+  Ok(result)
 }

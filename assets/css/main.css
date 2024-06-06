@@ -15,7 +15,7 @@ h1, h2, h3 {
   white-space: pre-wrap;
 }
 
-.box {
+.command-output {
   border-radius: 5px;
   padding: 5px;
   border-style: groove;
@@ -27,13 +27,13 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.search {
+.command-input {
   width: 100%;
   display: flex;
   flex-direction: row;
 }
 
-.search-left {
+.command-input__left {
   margin-right: 3px;
   width: 100%;
 }

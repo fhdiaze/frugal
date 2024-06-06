@@ -1,5 +1,5 @@
 use crate::{
-  cmd::{self, Command},
+  cmd::{self, Frugal},
   infra::error::{AppError, AppResult},
 };
 use askama::Template;
@@ -19,7 +19,7 @@ struct OutputTemplate {
 }
 
 async fn handle_run(Form(run): Form<Run>) -> AppResult<Html<String>> {
-  let result = Command::try_parse_from(run.cmd.split(' '))
+  let result = Frugal::try_parse_from(run.cmd.split(' '))
     .map_or_else(|e| Err(AppError::Parse(e)), cmd::run)
     .map_or_else(|e| e.to_string(), |o| o);
   let template = OutputTemplate { result };

@@ -20,12 +20,15 @@ enum PriceScmd {
 
 #[derive(Debug, Clone, Args)]
 pub struct Price {
-  #[arg(required = false)]
-  pub items: isize,
+  /// Grams, weight or units per item
   #[arg(required = false)]
   pub size: isize,
+  /// Cost of the items
   #[arg(required = false)]
   pub cost: f64,
+  /// Number of items included for the price
+  #[arg(required = false, default_value_t = 1)]
+  pub items: isize,
 }
 
 pub fn run(cmd: PriceCmd) -> Result<String, AppError> {

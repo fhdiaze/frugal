@@ -21,7 +21,7 @@ struct OutputTemplate {
 async fn handle_run(Form(run): Form<Run>) -> AppResult<Html<String>> {
   let result = Frugal::try_parse_from(run.cmd.split(' '))
     .map_or_else(|e| Err(AppError::Parse(e)), cmd::run)
-    .map_or_else(|e| e.to_string(), |o| o);
+    .unwrap_or_else(|e| e.to_string());
   let template = OutputTemplate { result };
   let content = template.render().map_err(AppError::Render)?;
 

@@ -4,8 +4,8 @@ use tracing::Level;
 use tracing_subscriber::EnvFilter;
 
 mod api;
-mod cmd;
 mod infra;
+mod module;
 
 #[tokio::main]
 async fn main() {

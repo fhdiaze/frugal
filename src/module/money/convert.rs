@@ -1,9 +1,6 @@
-use askama::Template;
+use super::common::{self, Money};
 use chrono::TimeDelta;
 use serde::Serialize;
-
-use super::common::{self, Money};
-use crate::infra::error::AppError;
 
 pub struct ConvertCmd {
   amount: Money,
@@ -22,17 +19,6 @@ impl ConvertCmd {
 #[derive(Serialize)]
 pub struct Time {
   pub hours: isize,
-}
-
-#[derive(Template)]
-#[template(path = "comps/convert.html")]
-struct ConvertTemplate;
-
-pub fn index() -> Result<String, AppError> {
-  let template = ConvertTemplate {};
-  let content = template.render().map_err(AppError::Render)?;
-
-  Ok(content)
 }
 
 pub fn run(cmd: ConvertCmd) -> TimeDelta {

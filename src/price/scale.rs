@@ -1,8 +1,10 @@
+use serde::Deserialize;
+
 pub struct UnitPrice {
   pub amount: f64,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Deserialize)]
 pub struct Command {
   /// Grams, weight or units per item
   pub size: isize,

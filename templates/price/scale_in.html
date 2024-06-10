@@ -1,0 +1,6 @@
+<form hx-post="/price.scale" hx-target="#outputs" hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()">
+    <input id="items" name="items" type="text" placeholder="Items" >
+    <input id="size" name="size" type="text" placeholder="Size" >
+    <input id="cost" name="cost" type="text" placeholder="Cost" >
+    <button type="submit">►</button>
+</form>

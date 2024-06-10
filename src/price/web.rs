@@ -9,7 +9,7 @@ use axum::{
 use super::scale;
 
 #[derive(Template)]
-#[template(path = "comps/price_index.html")]
+#[template(path = "price/index.html")]
 struct IndexTemplate;
 
 async fn handle_index() -> AppResult<Html<String>> {
@@ -20,16 +20,27 @@ async fn handle_index() -> AppResult<Html<String>> {
 }
 
 #[derive(Template)]
-#[template(path = "comps/scale.html")]
-struct ScaleTemplate {
+#[template(path = "price/scale_in.html")]
+struct ScaleInTemplate;
+
+async fn handle_scale_get() -> AppResult<Html<String>> {
+  let template = ScaleInTemplate {};
+  let content = template.render().map_err(AppError::Render)?;
+
+  Ok(Html(content))
+}
+
+#[derive(Template)]
+#[template(path = "price/scale_out.html")]
+struct ScaleOutTemplate {
   unit_price: f64,
 }
 
-async fn handle_scale(
+async fn handle_scale_run(
   Form(cmd): Form<scale::Command>,
 ) -> AppResult<Html<String>> {
   let unit_price = scale::handle(cmd);
-  let template = ScaleTemplate {
+  let template = ScaleOutTemplate {
     unit_price: unit_price.amount,
   };
   let content = template.render().map_err(AppError::Render)?;
@@ -40,5 +51,6 @@ async fn handle_scale(
 pub fn route() -> Router {
   Router::new()
     .route("/price.index", get(handle_index))
-    .route("/price.scale", post(handle_scale))
+    .route("/price.scale.get", get(handle_scale_get))
+    .route("/price.scale.run", post(handle_scale_run))
 }

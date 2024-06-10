@@ -5,7 +5,8 @@ use tracing_subscriber::EnvFilter;
 
 mod api;
 mod infra;
-mod module;
+mod money;
+mod price;
 
 #[tokio::main]
 async fn main() {

@@ -1,15 +1,16 @@
 use super::common::{self, Money};
 use chrono::TimeDelta;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 
-pub struct ConvertCmd {
+#[derive(Debug, Deserialize)]
+pub struct Command {
   amount: Money,
   hourly_wage: Money,
 }
 
-impl ConvertCmd {
+impl Command {
   pub fn new(amount: f64, hourly_rate: f64) -> Self {
-    ConvertCmd {
+    Command {
       amount: common::from_major(amount),
       hourly_wage: common::from_major(hourly_rate),
     }
@@ -21,7 +22,7 @@ pub struct Time {
   pub hours: isize,
 }
 
-pub fn run(cmd: ConvertCmd) -> TimeDelta {
+pub fn handle(cmd: Command) -> TimeDelta {
   let hours = cmd.amount / cmd.hourly_wage;
 
   TimeDelta::hours(hours)

@@ -1,0 +1,5 @@
+{% extends "comps/output.html" %}
+
+{% block content %}
+<a hx-get="/money.convert.get" hx-target="#outputs" hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()">Convert</a>
+{% endblock %}

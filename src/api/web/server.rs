@@ -1,5 +1,8 @@
 use super::home;
-use crate::{infra::config::Config, money, price};
+use crate::{
+  infra::config::Config,
+  module::{cmd, money, price},
+};
 use axum::{
   http::{header::CONTENT_TYPE, Method},
   serve, Router,
@@ -51,6 +54,7 @@ pub fn cors_layer() -> CorsLayer {
 fn build_router() -> Router {
   Router::new()
     .nest("/", home::route())
+    .nest("/", cmd::web::route())
     .nest("/", price::web::route())
     .nest("/", money::web::route())
     .nest_service("/assets", ServeDir::new("assets"))

@@ -41,7 +41,7 @@ async fn handle_convert_run(
 ) -> AppResult<Html<String>> {
   let time = convert::handle(cmd);
   let template = ConvertOutTemplate {
-    time: time.to_string(),
+    time: time.num_hours().to_string(),
   };
   let content = template.render().map_err(AppError::Render)?;
 

@@ -14,7 +14,7 @@ pub struct Command {
   pub items: isize,
 }
 
-pub fn handle(cmd: Command) -> UnitPrice {
+pub fn handle(cmd: &Command) -> UnitPrice {
   let unit_price = cmd.cost / (cmd.items * cmd.size) as f64;
 
   UnitPrice { amount: unit_price }

@@ -16,6 +16,14 @@ h1, h2, h3 {
   white-space: pre-wrap;
 }
 
+.frame {
+  border-radius: 5px;
+  padding: 5px;
+  border-style: groove;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .command-output {
   border-radius: 5px;
   padding: 5px;

@@ -20,11 +20,15 @@ async fn handle_index() -> AppResult<Html<String>> {
 }
 
 #[derive(Template)]
-#[template(path = "money/convert_in.html")]
+#[template(path = "money/convert.html")]
 struct ConvertInTemplate;
 
+#[derive(Template)]
+#[template(path = "money/convert.html")]
+struct ConvertTemplate;
+
 async fn handle_convert_get() -> AppResult<Html<String>> {
-  let template = ConvertInTemplate {};
+  let template = ConvertTemplate {};
   let content = template.render().map_err(AppError::Render)?;
 
   Ok(Html(content))

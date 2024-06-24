@@ -20,11 +20,11 @@ async fn handle_index() -> AppResult<Html<String>> {
 }
 
 #[derive(Template)]
-#[template(path = "price/scale_in.html")]
-struct ScaleInTemplate;
+#[template(path = "price/scale.html")]
+struct ScaleTemplate;
 
 async fn handle_scale_get() -> AppResult<Html<String>> {
-  let template = ScaleInTemplate {};
+  let template = ScaleTemplate {};
   let content = template.render().map_err(AppError::Render)?;
 
   Ok(Html(content))

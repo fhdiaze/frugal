@@ -3,10 +3,11 @@
 {% block content %}
 <h4>Scale a price:</h4>
 <p>It allows scaling a price to unit price in order to compare it easily.</p>
-<form hx-post="/price.scale.run" hx-target="#outputs" hx-swap="afterbegin">
+<form hx-post="/price.scale.run" hx-target="next #unit_price" hx-swap="innerHTML">
   <input id="items" name="items" type="text" placeholder="Items" value="1">
   <input id="size" name="size" type="text" placeholder="Size">
   <input id="cost" name="cost" type="text" placeholder="Cost">
   <button type="submit">►</button>
 </form>
+<dix id="unit_price" />
 {% endblock %}

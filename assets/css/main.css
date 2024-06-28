@@ -18,10 +18,18 @@ h1, h2, h3 {
 
 .frame {
   border-radius: 5px;
-  padding: 5px;
   border-style: groove;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.frame__actions {
+  border-bottom-style: groove;
+  flex-direction: row;
+}
+
+div:empty {
+  display: none;
 }
 
 .command-output {
@@ -46,4 +54,3 @@ h1, h2, h3 {
   margin-right: 3px;
   width: 100%;
 }
-

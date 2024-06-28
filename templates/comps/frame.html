@@ -1,2 +1,7 @@
-<div class="frame">{% block content %}{% endblock %}</div>
+<div class="frame">
+  <div id="frame-actions" class="frame__actions">{% block actions %}{% endblock %}</div>
+  <div id="frame-body">
+    {% block content %}{% endblock %}
+  </div>
+</div>
 

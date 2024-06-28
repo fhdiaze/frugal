@@ -1,12 +1,15 @@
 {% extends "comps/frame.html" %}
 
+{% block actions %}
+<button type="submit" hx-post="/money.convert.run" hx-target="next #time" hx-swap="innerHTML" hx-include="next #convert-form">►</button>
+{% endblock %}
+
 {% block content %}
 <h4>Convert money to time:</h4>
 <p>It allows converting money to the amount of time required to earn that money so you know the real cost.</p>
-<form hx-post="/money.convert.run" hx-target="next #time" hx-swap="innerHTML">
+<form id="convert-form" >
   <input id="amount" name="amount" type="text" placeholder="Amount">
   <input id="hourly_wage" name="hourly_wage" type="text" placeholder="Hourly Wage">
-  <button type="submit">►</button>
 </form>
 <dix id="time" />
 {% endblock %}

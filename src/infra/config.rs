@@ -2,16 +2,8 @@ use config as conf;
 use serde::Deserialize;
 
 #[derive(Debug, Deserialize, Clone)]
-pub enum Env {
-  Dev,
-  Test,
-  Prod,
-}
-
-#[derive(Debug, Deserialize, Clone)]
 pub struct Server {
   pub port: u16,
-  pub env: Env,
 }
 
 #[derive(Debug, Deserialize, Clone)]

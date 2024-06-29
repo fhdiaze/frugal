@@ -1,4 +1,8 @@
-use crate::infra::config::Config;
+use super::home;
+use crate::{
+  infra::config::Config,
+  module::{cmd, money, price},
+};
 use axum::{
   http::{header::CONTENT_TYPE, Method},
   serve, Router,
@@ -12,8 +16,6 @@ use tower_http::{
   trace::{DefaultMakeSpan, DefaultOnRequest, DefaultOnResponse, TraceLayer},
 };
 use tracing::{info, Level};
-
-use super::{cmd, home};
 
 pub async fn start(config: &Config) {
   info!("Starting the web server!");
@@ -52,6 +54,8 @@ pub fn cors_layer() -> CorsLayer {
 fn build_router() -> Router {
   Router::new()
     .nest("/", home::route())
-    .nest("/", cmd::route())
+    .nest("/", cmd::web::route())
+    .nest("/", price::web::route())
+    .nest("/", money::web::route())
     .nest_service("/assets", ServeDir::new("assets"))
 }

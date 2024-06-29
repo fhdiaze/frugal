@@ -1,0 +1,12 @@
+{% extends "comps/frame.html" %}
+
+{% block content %}
+<ul>
+  <li>
+    <a hx-boost="true" href="/money.convert.get" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">Convert money to time</a>
+  </li>
+  <li>
+    <a hx-boost="true" href="/price.scale.get" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">Scale price to unit price</a>
+  </li>
+</ul>
+{% endblock %}

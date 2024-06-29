@@ -1,31 +1,21 @@
-use askama::Template;
-use serde::Serialize;
+use serde::Deserialize;
 
-use crate::infra::error::AppError;
-
-use super::Price;
-
-#[derive(Serialize)]
 pub struct UnitPrice {
-  pub result: String,
+  pub amount: f64,
 }
 
-#[derive(Template)]
-#[template(path = "comps/scale.html")]
-struct ScaleTemplate;
-
-pub fn index() -> Result<String, AppError> {
-  let template = ScaleTemplate {};
-  let content = template.render().map_err(AppError::Render)?;
-
-  Ok(content)
+#[derive(Debug, Clone, Deserialize)]
+pub struct Command {
+  /// Grams, weight or units per item
+  pub size: isize,
+  /// Cost of the items
+  pub cost: f64,
+  /// Number of items included for the price
+  pub items: isize,
 }
 
-pub fn run(price: Price) -> String {
-  let unit = price.cost / (price.items * price.size) as f64;
-  let price = UnitPrice {
-    result: unit.to_string(),
-  };
+pub fn handle(cmd: &Command) -> UnitPrice {
+  let unit_price = cmd.cost / (cmd.items * cmd.size) as f64;
 
-  price.result
+  UnitPrice { amount: unit_price }
 }

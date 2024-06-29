@@ -1,10 +1,11 @@
 body {
   margin: 40px auto;
-  padding: 0;
+  padding: 0 10px;
   max-width: 650px;
   font-size: 18px;
   color: #444;
   line-height: 1.6;
+  display: block;
 }
 
 h1, h2, h3 {
@@ -13,6 +14,22 @@ h1, h2, h3 {
 
 .rich-text {
   white-space: pre-wrap;
+}
+
+.frame {
+  border-radius: 5px;
+  border-style: groove;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.frame__actions {
+  border-bottom-style: groove;
+  flex-direction: row;
+}
+
+div:empty {
+  display: none;
 }
 
 .command-output {
@@ -27,14 +44,13 @@ h1, h2, h3 {
   text-align: center;
 }
 
-.command-input {
+.grid--two-col {
   width: 100%;
   display: flex;
   flex-direction: row;
 }
 
-.command-input__left {
+.grid--two-col__left {
   margin-right: 3px;
   width: 100%;
 }
-

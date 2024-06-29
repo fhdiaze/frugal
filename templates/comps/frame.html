@@ -1,5 +1,9 @@
-<div class="frame">
-  <div id="frame-actions" class="frame__actions">{% block actions %}{% endblock %}</div>
+<div id="frame" class="frame">
+  <div id="frame-actions" class="frame__actions grid--two-col">
+    <div class="grid--two-col__left">{% block actions %} {% endblock %}</div>
+    <div>
+      <button hx-target="closest #frame" hx-swap="outerHTML" hx-delete="data:text/html,">x</button>
+    </div>
+  </div>
   <div id="frame-body">{% block content %}{% endblock %}</div>
 </div>
-

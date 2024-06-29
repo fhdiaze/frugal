@@ -32,8 +32,7 @@ async fn handle_scale_get() -> AppResult<Html<String>> {
 
 #[derive(Template)]
 #[template(path = "price/scale_out.html")]
-struct ScaleOutTemplate<'a> {
-  cmd: &'a scale::Command,
+struct ScaleOutTemplate {
   unit_price: f64,
 }
 
@@ -42,7 +41,6 @@ async fn handle_scale_run(
 ) -> AppResult<Html<String>> {
   let unit_price = scale::handle(&cmd);
   let template = ScaleOutTemplate {
-    cmd: &cmd,
     unit_price: unit_price.amount,
   };
   let content = template.render().map_err(AppError::Render)?;

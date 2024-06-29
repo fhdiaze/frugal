@@ -4,9 +4,7 @@ use axum::{response::Html, routing::post, Form, Router};
 use serde::Deserialize;
 
 #[derive(Deserialize)]
-struct Run {
-  cmd: String,
-}
+struct Run {}
 
 #[derive(Template)]
 #[template(path = "cmd/list.html")]

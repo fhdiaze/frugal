@@ -1,7 +1,8 @@
 <div id="frame" class="frame">
   <div id="frame-actions" class="frame__actions grid--two-col">
     <div class="grid--two-col__left">{% block actions %} {% endblock %}</div>
-    <div>
+    <div class="grid--row">
+      {% block frame_actions %} {% endblock %}
       <button hx-target="closest #frame" hx-swap="delete" hx-get>x</button>
     </div>
   </div>

@@ -17,27 +17,15 @@ h1, h2, h3 {
 }
 
 .frame {
-  border-radius: 5px;
   border-style: groove;
   margin-top: 5px;
   margin-bottom: 5px;
+  overflow: auto;
 }
 
 .frame__actions {
   border-bottom-style: groove;
   flex-direction: row;
-}
-
-div:empty {
-  display: none;
-}
-
-.command-output {
-  border-radius: 5px;
-  padding: 5px;
-  border-style: groove;
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 
 .footer {
@@ -50,7 +38,18 @@ div:empty {
   flex-direction: row;
 }
 
+.grid--row {
+  display: flex;
+  flex-direction: row;
+}
+
 .grid--two-col__left {
   margin-right: 3px;
   width: 100%;
+}
+
+.input-pair {
+  display: flex;
+  flex-direction: column;
+  margin: 3px;
 }

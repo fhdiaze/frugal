@@ -1,4 +1,4 @@
-use super::common;
+use super::util;
 use chrono::TimeDelta;
 use serde::{Deserialize, Serialize};
 
@@ -14,8 +14,8 @@ pub struct Time {
 }
 
 pub fn handle(cmd: Command) -> TimeDelta {
-  let amount = common::from_major(cmd.amount);
-  let hourly_wage = common::from_major(cmd.hourly_wage);
+  let amount = util::from_major(cmd.amount);
+  let hourly_wage = util::from_major(cmd.hourly_wage);
   let hours = amount / hourly_wage;
 
   TimeDelta::hours(hours)

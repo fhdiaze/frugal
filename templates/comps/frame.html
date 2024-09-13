@@ -3,7 +3,7 @@
     <div class="grid--two-col__left">{% block actions %} {% endblock %}</div>
     <div class="grid--row">
       {% block frame_actions %} {% endblock %}
-      <button hx-target="closest #frame" hx-swap="delete" hx-get>x</button>
+      <button _="on click remove the closest parent #frame">x</button>
     </div>
   </div>
   <div id="frame-body">{% block content %}{% endblock %}</div>

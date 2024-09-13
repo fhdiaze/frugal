@@ -1,7 +1,7 @@
 {% extends "comps/frame.html" %}
 
 {% block frame_actions %}
-<button hx-post="web/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">⧉</button>
+<button hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">⧉</button>
 {% endblock %}
 
 {% block content %}

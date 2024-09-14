@@ -4,9 +4,9 @@
 
 {% block content %}
 <div>
-  <form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()" class="grid--two-col">
-    <input id="cmd" name="cmd" type="search" placeholder="Ask" class="grid--two-col__left">
-    <button type="submit">►</button>
+  <form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()" class="right-sidebar">
+    <input id="cmd" name="cmd" type="search" placeholder="Ask" class="right-sidebar__main">
+    <button type="submit" class="right-sidebar__bar">►</button>
   </form>
 </div>
 <div id="outputs"></div>

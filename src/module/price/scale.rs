@@ -8,8 +8,10 @@ pub struct UnitPrice {
 pub struct Command {
   /// Grams, weight or units per item
   pub size: isize,
+
   /// Cost of the items
   pub cost: f64,
+
   /// Number of items included for the price
   pub items: isize,
 }

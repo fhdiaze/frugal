@@ -25,31 +25,34 @@ h1, h2, h3 {
 
 .frame__actions {
   border-bottom-style: groove;
-  flex-direction: row;
 }
 
 .footer {
   text-align: center;
 }
 
-.grid--two-col {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-
-.grid--row {
-  display: flex;
-  flex-direction: row;
-}
-
-.grid--two-col__left {
-  margin-right: 3px;
-  width: 100%;
-}
-
 .input-pair {
   display: flex;
   flex-direction: column;
   margin: 3px;
+}
+
+.right-sidebar {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2px;
+  width: 100%;
+}
+
+.right-sidebar__main {
+  width: 100%;
+}
+
+.right-sidebar__bar {
+  justify-content: right;
+}
+
+.grid--row {
+    display: flex;
+    flex-direction: row;
 }

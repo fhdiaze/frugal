@@ -11,7 +11,14 @@
 {% block content %}
 <h4>Scale a price:</h4>
 <p>It allows scaling a price to unit price in order to compare it easily.</p>
-<form id="scale-form">
+<div class="grid--row">
+    <span>Option:</span>
+    <input name="option" type="text" placeholder="Pams Milk 3L">
+</div>
+<div id="head">
+    <div id="unit-price" />
+</div>
+<form id="scale-form" class="grid--row">
   <div class="input-pair">
     <label for="items">Items</label>
     <input id="items" name="items" type="text" placeholder="Items" value="1">

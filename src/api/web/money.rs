@@ -1,12 +1,13 @@
-use crate::infra::error::{AppError, AppResult};
+use crate::{
+  infra::error::{AppError, AppResult},
+  module::money::convert,
+};
 use askama::Template;
 use axum::{
   response::Html,
   routing::{get, post},
   Form, Router,
 };
-
-use super::convert;
 
 #[derive(Template)]
 #[template(path = "price/index.html")]

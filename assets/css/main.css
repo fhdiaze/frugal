@@ -6,6 +6,7 @@ body {
   color: #444;
   line-height: 1.6;
   display: block;
+  overflow: auto;
 }
 
 h1, h2, h3 {
@@ -50,10 +51,15 @@ h1, h2, h3 {
 
 .right-sidebar__bar {
   flex-grow: 0;
+  justify-content: right;
 }
 
 .grid--row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.growable {
+  width: 100%;
 }

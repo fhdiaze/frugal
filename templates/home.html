@@ -3,11 +3,15 @@
 {% block title %}Frugal{% endblock %}
 
 {% block content %}
-<div>
-  <form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()" class="right-sidebar">
-    <input id="cmd" name="cmd" type="search" placeholder="Ask" class="right-sidebar__main">
-    <button type="submit" class="right-sidebar__bar">►</button>
-  </form>
-</div>
+<form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()">
+  <div class="right-sidebar">
+    <div class="right-sidebar__main">
+      <input id="cmd" name="cmd" type="search" placeholder="Ask" class="growable">
+    </div>
+    <div class="right-sidebar__bar">
+      <button type="submit">►</button>
+    </div>
+  </div>
+</form>
 <div id="outputs"></div>
 {% endblock %}

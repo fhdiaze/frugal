@@ -13,10 +13,6 @@ h1, h2, h3 {
   line-height: 1.2;
 }
 
-.rich-text {
-  white-space: pre-wrap;
-}
-
 .frame {
   border-style: groove;
   margin-top: 5px;

@@ -24,6 +24,12 @@ h1, h2, h3 {
   border-bottom-style: groove;
 }
 
+.actions__frame {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .footer {
   text-align: center;
 }
@@ -50,12 +56,12 @@ h1, h2, h3 {
   justify-content: right;
 }
 
-.grid--row {
+.scale-form {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
 
-.growable {
+.main-search__field {
   width: 100%;
 }

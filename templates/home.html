@@ -6,7 +6,7 @@
 <form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()">
   <div class="right-sidebar">
     <div class="right-sidebar__main">
-      <input id="cmd" name="cmd" type="search" placeholder="Ask" class="growable">
+      <input id="cmd" name="cmd" type="search" placeholder="Ask" class="main-search__field">
     </div>
     <div class="right-sidebar__bar">
       <button type="submit">►</button>

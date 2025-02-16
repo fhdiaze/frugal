@@ -45,9 +45,9 @@ pub fn cors_layer() -> CorsLayer {
 
 fn build_router() -> Router {
   Router::new()
-    .nest("/", home::route())
-    .nest("/", cmd::route())
-    .nest("/", price::route())
-    .nest("/", money::route())
+    .merge(home::route())
+    .merge(cmd::route())
+    .merge(price::route())
+    .merge(money::route())
     .nest_service("/assets", ServeDir::new("assets"))
 }

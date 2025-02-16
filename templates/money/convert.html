@@ -11,9 +11,15 @@
 {% block content %}
 <h4>Convert money to time:</h4>
 <p>It allows converting money to the amount of time required to earn that money so you know the real cost.</p>
-<form id="convert-form">
-  <input id="amount" name="amount" type="text" placeholder="Amount">
-  <input id="hourly-wage" name="hourly-wage" type="text" placeholder="Hourly Wage">
+<form id="convert-form" class="convert-form">
+  <div class="input-pair">
+    <label for="hourly-wage">Amount:</label>
+    <input id="amount" name="amount" type="text" placeholder="Amount">
+  </div>
+  <div class="input-pair">
+    <label for="hourly-wage">Hourly Wage:</label>
+    <input id="hourly-wage" name="hourly-wage" type="text" placeholder="Hourly Wage">
+  </div>
 </form>
 <dix id="time" />
 {% endblock %}

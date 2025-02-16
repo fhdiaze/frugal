@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize)]
 pub struct Command {
   amount: f64,
+  #[serde(rename(deserialize = "hourly-wage"))]
   hourly_wage: f64,
 }
 

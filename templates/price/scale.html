@@ -11,25 +11,25 @@
 {% block content %}
 <h4>Scale a price:</h4>
 <p>It allows scaling a price to unit price in order to compare it easily.</p>
-<div class="input-pair">
+<div class="form__input-pair">
     <span>Option:</span>
     <input name="option" type="text" placeholder="Pams Milk 3L">
 </div>
 <div id="head">
     <div id="unit-price" />
 </div>
-<form id="scale-form" class="scale-form">
-  <div class="input-pair">
+<form id="scale-form" class="form">
+  <div class="form__input-pair">
     <label for="items">Items</label>
-    <input id="items" name="items" type="text" placeholder="Items" value="1">
+    <input id="items" name="items" type="number" placeholder="Items" value="1">
   </div>
-  <div class="input-pair">
+  <div class="form__input-pair">
     <label for="size">Size</label>
-    <input id="size" name="size" type="text" placeholder="Size">
+    <input id="size" name="size" type="number" placeholder="Size">
   </div>
-  <div class="input-pair">
+  <div class="form__input-pair">
     <label for="cost">Cost</label>
-    <input id="cost" name="cost" type="text" placeholder="Cost">
+    <input id="cost" name="cost" type="number" placeholder="Cost">
   </div>
 </form>
 <dix id="unit-price" />

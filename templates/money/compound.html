@@ -1,0 +1,41 @@
+{% extends "comps/frame.html" %}
+
+{% block actions %}
+<button type="submit" hx-post="/money.compound.run" hx-target="next #result" hx-swap="innerHTML" hx-include="next #compound-form">►</button>
+{% endblock %}
+
+{% block frame_actions %}
+<button hx-get="/money.compound.get" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">⧉</button>
+{% endblock %}
+
+{% block content %}
+<h4>Compound money over time:</h4>
+<p>It allows compounding an amount of money over a period of time.</p>
+<form id="compound-form" class="form">
+  <div class="form__input-pair">
+    <label for="amount">Amount:</label>
+    <input id="amount" name="amount" type="number" placeholder="Amount">
+  </div>
+  <div class="form__input-pair">
+    <label for="contribution">Contribution:</label>
+    <input id="contribution" name="contribution" type="number" placeholder="Contribution">
+  </div>
+  <div class="form__input-pair">
+    <label for="interest-rate">Interest Rate:</label>
+    <input id="interest-rate" name="interest-rate" type="number" placeholder="Interest Rate">
+  </div>
+  <div class="form__input-pair">
+    <label for="years">Years:</label>
+    <input id="years" name="years" type="number" placeholder="Years">
+  </div>
+  <div class="form__input-pair">
+    <label for="frequency">Frequency:</label>
+    <select id="frequency" name="frequency" type="text" placeholder="Frequency">
+      {% for frequency in frequencies %}
+      <option value="{{ frequency }}">{{ frequency }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</form>
+<div id="result" />
+{% endblock %}

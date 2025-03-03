@@ -1,3 +1,3 @@
 pub mod compound;
 pub mod convert;
-pub mod util;
+pub mod money_type;

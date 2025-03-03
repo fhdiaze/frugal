@@ -25,9 +25,7 @@ impl Money {
   }
 
   pub fn from_major(amount: f64) -> Money {
-    let rounded = (amount * 100.0).round() / 100.0;
-
-    Money((rounded * 100.0) as Inner)
+    Money((amount * 100.0).round() as Inner)
   }
 }
 

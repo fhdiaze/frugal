@@ -3,7 +3,7 @@ use crate::{
   module::money::{
     compound::{self, Frequency},
     convert::{self, Command},
-    util::Money,
+    money_type::Money,
   },
 };
 use askama::Template;

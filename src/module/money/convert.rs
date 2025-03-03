@@ -1,4 +1,4 @@
-use super::util::Money;
+use super::money_type::Money;
 use chrono::TimeDelta;
 use serde::{Deserialize, Serialize};
 

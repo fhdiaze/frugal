@@ -2,7 +2,7 @@ use serde::Deserialize;
 
 use crate::infra::error::AppResult;
 
-use super::util::Money;
+use super::money_type::Money;
 
 #[derive(Debug, Deserialize)]
 pub struct Command {

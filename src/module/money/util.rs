@@ -17,7 +17,7 @@ impl Money {
     self.0 / 100
   }
 
-  pub fn to_major(&self) -> f64 {
+  pub fn to_major(self) -> f64 {
     let major = self.major();
     let minor = self.minor();
 
@@ -35,7 +35,7 @@ impl Mul<f64> for Money {
   type Output = Money;
 
   fn mul(self, rhs: f64) -> Self::Output {
-    Money((self.0 as f64 * rhs).round() as Inner)
+    Self::from_minor(self.0 as f64 * rhs)
   }
 }
 

@@ -6,7 +6,7 @@ use super::money_type::Money;
 
 #[derive(Debug, Deserialize)]
 pub struct Command {
-  amount: f64,
+  principal: Money,
   contribution: f64,
   #[serde(rename(deserialize = "interest-rate"))]
   interest_rate: f64,
@@ -24,15 +24,40 @@ pub enum Frequency {
 }
 
 pub fn handle(cmd: Command) -> AppResult<Money> {
-  let mut amount = Money::from_major(cmd.amount);
-  let compounds = cmd.years * 12;
+  let frequency_map = [365, 12, 4, 2, 1];
+  let compounds_per_year = frequency_map[cmd.frequency as usize];
+  let total_compounds = cmd.years * compounds_per_year;
+  let rate_per_period = cmd.interest_rate / 100.0 / compounds_per_year as f64;
 
-  for _ in 0..compounds {
-    let interest_rate = cmd.interest_rate / 100.0;
-    let monthly_interest_rate = interest_rate / 12.0;
-    let interest = amount * monthly_interest_rate;
-    amount = amount + interest + cmd.contribution;
+  let accumulated_amount = cmd.principal
+    * (1.0 + rate_per_period).powi(total_compounds)
+    + cmd.contribution * (1.0 + rate_per_period).powi(total_compounds);
+
+  Ok(accumulated_amount)
+}
+
+#[cfg(test)]
+mod tests {
+  use crate::module::money::money_type::Money;
+
+  use super::{handle, Command, Frequency};
+
+  #[test]
+  fn handle_should_success() {
+    // Arrange
+    let cmd = Command {
+      principal: Money::from_major(1.0),
+      contribution: 0.0,
+      frequency: Frequency::Monthly,
+      interest_rate: 1.0,
+      years: 10,
+    };
+
+    // Act
+    let result = handle(cmd);
+
+    // Assert
+    let expected_amount = 1.0 * (1.0 + 0.01_f64 / 12.0).powi(10 * 12);
+    assert_eq!(result.unwrap(), Money::from_major(expected_amount));
   }
-
-  Ok(amount)
 }

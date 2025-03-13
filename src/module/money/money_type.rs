@@ -1,6 +1,19 @@
 use std::ops::{Add, Div, Mul, Sub};
 
-#[derive(Clone, Copy, Eq, Hash, Ord, PartialEq, PartialOrd, Debug)]
+use serde::{Deserialize, Serialize};
+
+#[derive(
+  Clone,
+  Copy,
+  Eq,
+  Hash,
+  Ord,
+  PartialEq,
+  PartialOrd,
+  Debug,
+  Deserialize,
+  Serialize,
+)]
 pub struct Money(Inner);
 type Inner = i64;
 

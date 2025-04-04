@@ -5,7 +5,7 @@ use super::price;
 use crate::infra::{config::Config, logger};
 use axum::{
   http::{header::CONTENT_TYPE, Method},
-  serve, Router,
+  Router,
 };
 use std::net::SocketAddr;
 use tokio::net::TcpListener;
@@ -31,7 +31,7 @@ pub async fn start(config: &Config) {
     .await
     .expect("Error while binding the address!");
 
-  serve(listener, router)
+  axum::serve(listener, router)
     .await
     .expect("Failed to start the web server");
 }

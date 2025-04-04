@@ -1,12 +1,11 @@
 use serde::Deserialize;
 
 use crate::infra::error::AppResult;
-
-use super::money_type::Money;
+use crate::util::money::Money;
 
 #[derive(Debug, Deserialize)]
 pub struct Command {
-  principal: Money,
+  principal: f64,
   contribution: f64,
   #[serde(rename(deserialize = "interest-rate"))]
   interest_rate: f64,
@@ -31,22 +30,23 @@ pub fn handle(cmd: Command) -> AppResult<Money> {
 
   let accumulated_amount = cmd.principal
     * (1.0 + rate_per_period).powi(total_compounds)
-    + cmd.contribution * (1.0 + rate_per_period).powi(total_compounds);
+    + cmd.contribution * ((1.0 + rate_per_period).powi(total_compounds) - 1.0)
+      / rate_per_period;
 
-  Ok(accumulated_amount)
+  Ok(Money::from_major(accumulated_amount))
 }
 
 #[cfg(test)]
 mod tests {
-  use crate::module::money::money_type::Money;
+  use crate::util::money::Money;
 
   use super::{handle, Command, Frequency};
 
   #[test]
-  fn handle_should_success() {
+  fn handle_should_success_without_contribution() {
     // Arrange
     let cmd = Command {
-      principal: Money::from_major(1.0),
+      principal: 1.0,
       contribution: 0.0,
       frequency: Frequency::Monthly,
       interest_rate: 1.0,
@@ -57,7 +57,23 @@ mod tests {
     let result = handle(cmd);
 
     // Assert
-    let expected_amount = 1.0 * (1.0 + 0.01_f64 / 12.0).powi(10 * 12);
-    assert_eq!(result.unwrap(), Money::from_major(expected_amount));
+    assert_eq!(result.unwrap(), Money::from_major(1.11));
+  }
+
+  #[test]
+  fn handle_should_success_with_contribution() {
+    let cmd = Command {
+      principal: 1.0,
+      contribution: 1.0,
+      frequency: Frequency::Monthly,
+      interest_rate: 1.0,
+      years: 10,
+    };
+
+    // Act
+    let result = handle(cmd);
+
+    // Assert
+    assert_eq!(result.unwrap(), Money::from_major(127.25));
   }
 }

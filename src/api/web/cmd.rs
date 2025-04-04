@@ -12,7 +12,7 @@ struct ListTemplate;
 
 async fn handle_run(Form(_run): Form<Run>) -> AppResult<Html<String>> {
   let template = ListTemplate {};
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }

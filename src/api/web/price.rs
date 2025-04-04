@@ -1,6 +1,6 @@
 use crate::{
+  core::price::scale,
   infra::error::{AppError, AppResult},
-  module::price::scale,
 };
 use askama::Template;
 use axum::{
@@ -15,7 +15,7 @@ struct IndexTemplate;
 
 async fn handle_index() -> AppResult<Html<String>> {
   let template = IndexTemplate {};
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }
@@ -26,7 +26,7 @@ struct ScaleTemplate;
 
 async fn handle_scale_get() -> AppResult<Html<String>> {
   let template = ScaleTemplate {};
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }
@@ -44,7 +44,7 @@ async fn handle_scale_run(
   let template = ScaleOutTemplate {
     unit_price: unit_price.amount,
   };
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }

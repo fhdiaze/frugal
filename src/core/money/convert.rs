@@ -1,6 +1,7 @@
-use super::money_type::Money;
 use chrono::TimeDelta;
 use serde::{Deserialize, Serialize};
+
+use crate::util::money::Money;
 
 #[derive(Debug, Deserialize)]
 pub struct Command {

@@ -9,7 +9,7 @@ struct HomeTemplate;
 
 async fn handle_get() -> AppResult<Html<String>> {
   let template = HomeTemplate {};
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }

@@ -1,10 +1,10 @@
 use crate::{
-  infra::error::{AppError, AppResult},
-  module::money::{
+  core::money::{
     compound::{self, Frequency},
     convert::{self, Command},
-    money_type::Money,
   },
+  infra::error::{AppError, AppResult},
+  util::money::Money,
 };
 use askama::Template;
 use axum::{
@@ -19,7 +19,7 @@ struct IndexTemplate;
 
 async fn handle_index() -> AppResult<Html<String>> {
   let template = IndexTemplate {};
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }
@@ -30,7 +30,7 @@ struct ConvertTemplate;
 
 async fn handle_convert_get() -> AppResult<Html<String>> {
   let template = ConvertTemplate {};
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }
@@ -48,7 +48,7 @@ async fn handle_convert_run(
   let template = ConvertOutTemplate {
     time: time.num_hours().to_string(),
   };
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }
@@ -73,7 +73,7 @@ async fn handle_compound_get() -> AppResult<Html<String>> {
       .map(|x| format!("{:?}", x))
       .collect(),
   };
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }
@@ -91,7 +91,7 @@ async fn handle_compound_run(
   let template = CompoundOutTemplate {
     amount: Money::to_major(amount),
   };
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }

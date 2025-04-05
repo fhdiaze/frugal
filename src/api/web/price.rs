@@ -1,4 +1,7 @@
-use crate::infra::error::{AppError, AppResult};
+use crate::{
+  core::price::scale,
+  infra::error::{AppError, AppResult},
+};
 use askama::Template;
 use axum::{
   response::Html,
@@ -6,15 +9,13 @@ use axum::{
   Form, Router,
 };
 
-use super::scale;
-
 #[derive(Template)]
 #[template(path = "price/index.html")]
 struct IndexTemplate;
 
 async fn handle_index() -> AppResult<Html<String>> {
   let template = IndexTemplate {};
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }
@@ -25,7 +26,7 @@ struct ScaleTemplate;
 
 async fn handle_scale_get() -> AppResult<Html<String>> {
   let template = ScaleTemplate {};
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }
@@ -43,7 +44,7 @@ async fn handle_scale_run(
   let template = ScaleOutTemplate {
     unit_price: unit_price.amount,
   };
-  let content = template.render().map_err(AppError::Render)?;
+  let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }

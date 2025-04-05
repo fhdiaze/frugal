@@ -1,5 +1,9 @@
 {% extends "comps/frame.html" %}
 
+{% block frame_actions %}
+<button hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">⧉</button>
+{% endblock %}
+
 {% block content %}
 <ul>
   <li>
@@ -7,6 +11,9 @@
   </li>
   <li>
     <a hx-boost="true" href="/price.scale.get" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">Scale price to unit price</a>
+  </li>
+  <li>
+    <a hx-boost="true" href="/money.compound.get" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">Compound money over time</a>
   </li>
 </ul>
 {% endblock %}

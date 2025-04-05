@@ -1,16 +1,36 @@
 {% extends "comps/frame.html" %}
 
 {% block actions %}
-<button type="submit" hx-post="/price.scale.run" hx-target="next #unit_price" hx-swap="innerHTML" hx-include="next #scale-form">►</button>
+<button type="submit" hx-post="/price.scale.run" hx-target="next #unit-price" hx-swap="innerHTML" hx-include="next #scale-form">►</button>
+{% endblock %}
+
+{% block frame_actions %}
+<button hx-get="/price.scale.get" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">⧉</button>
 {% endblock %}
 
 {% block content %}
 <h4>Scale a price:</h4>
 <p>It allows scaling a price to unit price in order to compare it easily.</p>
-<form id="scale-form">
-  <input id="items" name="items" type="text" placeholder="Items" value="1">
-  <input id="size" name="size" type="text" placeholder="Size">
-  <input id="cost" name="cost" type="text" placeholder="Cost">
+<div class="form__input-pair">
+    <span>Option:</span>
+    <input name="option" type="text" placeholder="Pams Milk 3L">
+</div>
+<div id="head">
+    <div id="unit-price" />
+</div>
+<form id="scale-form" class="form">
+  <div class="form__input-pair">
+    <label for="items">Items</label>
+    <input id="items" name="items" type="number" placeholder="Items" value="1">
+  </div>
+  <div class="form__input-pair">
+    <label for="size">Size</label>
+    <input id="size" name="size" type="number" placeholder="Size">
+  </div>
+  <div class="form__input-pair">
+    <label for="cost">Cost</label>
+    <input id="cost" name="cost" type="number" placeholder="Cost">
+  </div>
 </form>
 <dix id="unit-price" />
 {% endblock %}

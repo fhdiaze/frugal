@@ -4,12 +4,22 @@
 <button type="submit" hx-post="/money.convert.run" hx-target="next #time" hx-swap="innerHTML" hx-include="next #convert-form">►</button>
 {% endblock %}
 
+{% block frame_actions %}
+<button hx-get="/money.convert.get" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">⧉</button>
+{% endblock %}
+
 {% block content %}
 <h4>Convert money to time:</h4>
 <p>It allows converting money to the amount of time required to earn that money so you know the real cost.</p>
-<form id="convert-form" >
-  <input id="amount" name="amount" type="text" placeholder="Amount">
-  <input id="hourly-wage" name="hourly-wage" type="text" placeholder="Hourly Wage">
+<form id="convert-form" class="form">
+  <div class="form__input-pair">
+    <label for="amount">Amount:</label>
+    <input id="amount" name="amount" type="number" placeholder="Amount">
+  </div>
+  <div class="form__input-pair">
+    <label for="hourly-wage">Hourly Wage:</label>
+    <input id="hourly-wage" name="hourly-wage" type="number" placeholder="Hourly Wage">
+  </div>
 </form>
 <dix id="time" />
 {% endblock %}

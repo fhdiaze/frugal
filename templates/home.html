@@ -1,13 +1,17 @@
-{% extends "base.html" %}
+{% extends "comps/base.html" %}
 
 {% block title %}Frugal{% endblock %}
 
 {% block content %}
-<div>
-  <form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()" class="grid--two-col">
-    <input id="cmd" name="cmd" type="search" placeholder="Ask" class="grid--two-col__left">
-    <button type="submit">►</button>
-  </form>
-</div>
+<form hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-on::after-request="if(event.detail.successful) this.reset()">
+  <div class="right-sidebar">
+    <div class="right-sidebar__main">
+      <input id="cmd" name="cmd" type="search" placeholder="Ask" class="main-search__field">
+    </div>
+    <div class="right-sidebar__bar">
+      <button type="submit">►</button>
+    </div>
+  </div>
+</form>
 <div id="outputs"></div>
 {% endblock %}

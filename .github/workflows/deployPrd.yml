@@ -1,5 +1,5 @@
-name: deployProd
-concurrency: prod
+name: deployPrd
+concurrency: prd
 run-name: ${{ github.actor }} run this workflow
 
 on:
@@ -11,13 +11,13 @@ on:
 env:
   REGISTRY: ${{ vars.REGISTRY }}
   IMAGE_NAME: ${{ github.repository }}
-  APP_NAME: prodfrugal
+  APP_NAME: prdfrugal
   SLOT_NAME: production
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: prod
+    environment: prd
     permissions:
       contents: read
       packages: write
@@ -52,7 +52,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    environment: prod
+    environment: prd
     steps:
       - name: deploy
         uses: azure/webapps-deploy@v2

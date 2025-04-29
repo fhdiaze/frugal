@@ -4,3 +4,8 @@ env = "Dev"
 
 [log]
 level = "info"
+
+[db]
+connection_string = ""
+db_name = "frugal"
+expenses_container = "expenses"

@@ -1,8 +1,5 @@
 use crate::{
-  core::money::{
-    compound::{self, Frequency},
-    convert::{self, Command},
-  },
+  commands::{self, Frequency},
   infra::error::{AppError, AppResult},
   util::money::Money,
 };
@@ -42,9 +39,9 @@ struct ConvertOutTemplate {
 }
 
 async fn handle_convert_run(
-  Form(cmd): Form<Command>,
+  Form(cmd): Form<commands::ConvertCmd>,
 ) -> AppResult<Html<String>> {
-  let time = convert::handle(cmd);
+  let time = commands::handle_convert_cmd(cmd);
   let template = ConvertOutTemplate {
     time: time.num_hours().to_string(),
   };
@@ -85,9 +82,9 @@ struct CompoundOutTemplate {
 }
 
 async fn handle_compound_run(
-  Form(cmd): Form<compound::Command>,
+  Form(cmd): Form<commands::CompoundCmd>,
 ) -> AppResult<Html<String>> {
-  let amount = compound::handle(cmd)?;
+  let amount = commands::handle_compound_cmd(cmd)?;
   let template = CompoundOutTemplate {
     amount: Money::to_major(amount),
   };
@@ -96,7 +93,7 @@ async fn handle_compound_run(
   Ok(Html(content))
 }
 
-pub fn route() -> Router {
+pub fn route_money() -> Router {
   Router::new()
     .route("/money.index", get(handle_index))
     .route("/money.convert.get", get(handle_convert_get))

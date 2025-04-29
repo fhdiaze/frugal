@@ -1,0 +1,25 @@
+{% extends "comps/frame.html" %}
+
+{% block actions %}
+<button hx-post="/expense.register.run" hx-target="next #result" hx-swap="innerHTML" hx-include="next #register-form" hx-replace-url="false">►</button>
+{% endblock %}
+
+{% block frame_actions %}
+<button hx-post="/cmd.run" hx-target="#outputs" hx-swap="afterbegin" hx-replace-url="false">⧉</button>
+{% endblock %}
+
+{% block content %}
+<h4>Register an expense:</h4>
+<p>This allows you to track your expenses:</p>
+<form id="register-form" class="form" hx-post="/expense.register.run">
+  <div class="form__input-pair">
+    <label for="description">Description:</label>
+    <input id="description" name="description" type="text">
+  </div>
+  <div class="form__input-pair">
+    <label for="amount">Amount:</label>
+    <input id="amount" name="amount" type="number">
+  </div>
+</form>
+<div id="result" />
+{% endblock %}

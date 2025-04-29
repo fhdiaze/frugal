@@ -17,6 +17,6 @@ async fn handle_run(Form(_run): Form<Run>) -> AppResult<Html<String>> {
   Ok(Html(content))
 }
 
-pub fn route() -> Router {
+pub fn route_cmd() -> Router {
   Router::new().route("/cmd.run", post(handle_run))
 }

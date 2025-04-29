@@ -5,7 +5,7 @@ pub struct UnitPrice {
 }
 
 #[derive(Debug, Clone, Deserialize)]
-pub struct Command {
+pub struct ScaleCmd {
   /// Grams, weight or units per item
   pub size: isize,
 
@@ -16,7 +16,7 @@ pub struct Command {
   pub items: isize,
 }
 
-pub fn handle(cmd: &Command) -> UnitPrice {
+pub fn handle_scale_cmd(cmd: &ScaleCmd) -> UnitPrice {
   let unit_price = cmd.cost / (cmd.items * cmd.size) as f64;
 
   UnitPrice { amount: unit_price }

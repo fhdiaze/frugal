@@ -4,7 +4,7 @@ use crate::infra::error::AppResult;
 use crate::util::money::Money;
 
 #[derive(Debug, Deserialize)]
-pub struct Command {
+pub struct CompoundCmd {
   principal: f64,
   contribution: f64,
   #[serde(rename(deserialize = "interest-rate"))]
@@ -22,7 +22,7 @@ pub enum Frequency {
   Annually,
 }
 
-pub fn handle(cmd: Command) -> AppResult<Money> {
+pub fn handle_compound_cmd(cmd: CompoundCmd) -> AppResult<Money> {
   let frequency_map = [365, 12, 4, 2, 1];
   let compounds_per_year = frequency_map[cmd.frequency as usize];
   let total_compounds = cmd.years * compounds_per_year;
@@ -40,12 +40,12 @@ pub fn handle(cmd: Command) -> AppResult<Money> {
 mod tests {
   use crate::util::money::Money;
 
-  use super::{handle, Command, Frequency};
+  use super::{handle_compound_cmd, CompoundCmd, Frequency};
 
   #[test]
   fn handle_should_success_without_contribution() {
     // Arrange
-    let cmd = Command {
+    let cmd = CompoundCmd {
       principal: 1.0,
       contribution: 0.0,
       frequency: Frequency::Monthly,
@@ -54,7 +54,7 @@ mod tests {
     };
 
     // Act
-    let result = handle(cmd);
+    let result = handle_compound_cmd(cmd);
 
     // Assert
     assert_eq!(result.unwrap(), Money::from_major(1.11));
@@ -62,7 +62,7 @@ mod tests {
 
   #[test]
   fn handle_should_success_with_contribution() {
-    let cmd = Command {
+    let cmd = CompoundCmd {
       principal: 1.0,
       contribution: 1.0,
       frequency: Frequency::Monthly,
@@ -71,7 +71,7 @@ mod tests {
     };
 
     // Act
-    let result = handle(cmd);
+    let result = handle_compound_cmd(cmd);
 
     // Assert
     assert_eq!(result.unwrap(), Money::from_major(127.25));

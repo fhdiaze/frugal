@@ -11,10 +11,18 @@ pub struct Log {
   pub level: String,
 }
 
+#[derive(Debug, Deserialize, Clone)]
+pub struct Db {
+  pub connection_string: String,
+  pub db_name: String,
+  pub expenses_container: String,
+}
+
 #[derive(Debug, Deserialize)]
 pub struct Config {
   pub server: Server,
   pub log: Log,
+  pub db: Db,
 }
 
 impl Config {

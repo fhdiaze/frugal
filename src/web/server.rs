@@ -1,7 +1,5 @@
-use super::cmd;
-use super::home;
-use super::money;
-use super::price;
+use super::*;
+use crate::infra::cosmos;
 use crate::infra::{config::Config, logger};
 use axum::{
   http::{header::CONTENT_TYPE, Method},
@@ -22,7 +20,9 @@ pub async fn start(config: &Config) {
   let service_builder = ServiceBuilder::new()
     .layer(logger::trace_layer())
     .layer(cors_layer());
-  let router = build_router().layer(service_builder);
+  let router = build_router()
+    .layer(service_builder)
+    .with_state(cosmos::new(&config));
   let address = SocketAddr::from(([0, 0, 0, 0], config.server.port));
 
   tracing::info!("Server is going to listen on address={}", address);
@@ -45,9 +45,10 @@ pub fn cors_layer() -> CorsLayer {
 
 fn build_router() -> Router {
   Router::new()
-    .merge(home::route())
-    .merge(cmd::route())
-    .merge(price::route())
-    .merge(money::route())
+    .merge(route_home())
+    .merge(route_cmd())
+    .merge(route_price())
+    .merge(route_money())
+    .merge(route_expense())
     .nest_service("/assets", ServeDir::new("assets"))
 }

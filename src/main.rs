@@ -1,14 +1,13 @@
-use api::web::server;
 use infra::{config::Config, logger};
 
-mod api;
-mod core;
+mod commands;
 mod infra;
 mod util;
+mod web;
 
 #[tokio::main]
 async fn main() {
   let config = Config::new().expect("Failed to load configuration");
   logger::add_logger(&config);
-  server::start(&config).await;
+  web::start(&config).await;
 }

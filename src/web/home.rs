@@ -1,7 +1,6 @@
+use crate::infra::error::{AppError, AppResult};
 use askama::Template;
 use axum::{response::Html, routing::get, Router};
-
-use crate::infra::error::{AppError, AppResult};
 
 #[derive(Template)]
 #[template(path = "home.html")]
@@ -14,6 +13,6 @@ async fn handle_get() -> AppResult<Html<String>> {
   Ok(Html(content))
 }
 
-pub fn route() -> Router {
+pub fn route_home() -> Router {
   Router::new().route("/", get(handle_get))
 }

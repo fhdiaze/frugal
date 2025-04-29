@@ -1,5 +1,5 @@
 use crate::{
-  core::price::scale,
+  commands,
   infra::error::{AppError, AppResult},
 };
 use askama::Template;
@@ -38,9 +38,9 @@ struct ScaleOutTemplate {
 }
 
 async fn handle_scale_run(
-  Form(cmd): Form<scale::Command>,
+  Form(cmd): Form<commands::ScaleCmd>,
 ) -> AppResult<Html<String>> {
-  let unit_price = scale::handle(&cmd);
+  let unit_price = commands::handle_scale_cmd(&cmd);
   let template = ScaleOutTemplate {
     unit_price: unit_price.amount,
   };
@@ -49,7 +49,7 @@ async fn handle_scale_run(
   Ok(Html(content))
 }
 
-pub fn route() -> Router {
+pub fn route_price() -> Router {
   Router::new()
     .route("/price.index", get(handle_index))
     .route("/price.scale.get", get(handle_scale_get))

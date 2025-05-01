@@ -1,5 +1,4 @@
-use crate::util::money::Money;
-use azure_data_cosmos::clients::DatabaseClient;
+use crate::{infra::cosmos::DynDbClient, util::money::Money};
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -8,6 +7,6 @@ pub struct RegisterCmd {
   description: String,
 }
 
-pub fn handle_register_cmd(_: RegisterCmd, _: &DatabaseClient) -> u64 {
+pub fn handle_register_cmd(_: RegisterCmd, _: DynDbClient) -> u64 {
   1
 }

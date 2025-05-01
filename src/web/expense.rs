@@ -1,7 +1,7 @@
 use crate::{
   commands,
   infra::{
-    cosmos::DynCosmosClient,
+    cosmos::DynDbClient,
     error::{AppError, AppResult},
   },
 };
@@ -30,19 +30,18 @@ struct ExpenseOutTemplate {
   expense_id: u64,
 }
 
-#[axum::debug_handler]
 async fn handle_register_run(
-  State(db): State<DynCosmosClient>,
+  State(db): State<DynDbClient>,
   Form(cmd): Form<commands::RegisterCmd>,
 ) -> AppResult<Html<String>> {
-  let expense_id = commands::handle_register_cmd(cmd, &db);
+  let expense_id = commands::handle_register_cmd(cmd, db);
   let template = ExpenseOutTemplate { expense_id };
   let content = template.render().map_err(AppError::RenderingError)?;
 
   Ok(Html(content))
 }
 
-pub fn route_expense() -> Router<DynCosmosClient> {
+pub fn route_expense() -> Router<DynDbClient> {
   Router::new()
     .route("/expense.register.get", get(handle_register_get))
     .route("/expense.register.run", post(handle_register_run))

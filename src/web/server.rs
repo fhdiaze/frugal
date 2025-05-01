@@ -1,11 +1,12 @@
 use super::*;
-use crate::infra::cosmos;
+use crate::infra::cosmos::{AzDbClient, DynDbClient};
 use crate::infra::{config::Config, logger};
 use axum::{
   http::{header::CONTENT_TYPE, Method},
   Router,
 };
 use std::net::SocketAddr;
+use std::sync::Arc;
 use tokio::net::TcpListener;
 use tower::ServiceBuilder;
 use tower_http::{
@@ -20,9 +21,7 @@ pub async fn start(config: &Config) {
   let service_builder = ServiceBuilder::new()
     .layer(logger::trace_layer())
     .layer(cors_layer());
-  let router = build_router()
-    .layer(service_builder)
-    .with_state(cosmos::new(&config));
+  let router = build_router(config).layer(service_builder);
   let address = SocketAddr::from(([0, 0, 0, 0], config.server.port));
 
   tracing::info!("Server is going to listen on address={}", address);
@@ -43,12 +42,13 @@ pub fn cors_layer() -> CorsLayer {
     .allow_origin(Any)
 }
 
-fn build_router() -> Router {
+fn build_router(config: &Config) -> Router {
+  let cosmos_client = Arc::new(AzDbClient::new(&config));
   Router::new()
     .merge(route_home())
     .merge(route_cmd())
     .merge(route_price())
     .merge(route_money())
-    .merge(route_expense())
     .nest_service("/assets", ServeDir::new("assets"))
+    .nest("/", route_expense().with_state(cosmos_client))
 }
